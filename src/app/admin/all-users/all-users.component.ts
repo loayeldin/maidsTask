@@ -36,6 +36,8 @@ export class AllUsersComponent  {
   usersView!:string | null
   ngOnInit(){
     if (localStorage.getItem("usersView")) {
+      console.log("sdssss");
+      
 
    
       
@@ -49,6 +51,14 @@ export class AllUsersComponent  {
        
         this.cardView();
       }
+    }
+
+    else{
+
+
+      localStorage.setItem("usersView","tableView")
+      this.tableView()
+
     }
 
 
@@ -108,7 +118,10 @@ export class AllUsersComponent  {
 
   openUserDetails(id:number){
     
-    this.router.navigate(['admin/allusers',id])
+    this.router.navigate(['/admin/allusers', id]);
+    console.log(id);
+    
+    
     
   }
 
