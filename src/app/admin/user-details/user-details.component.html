@@ -44,7 +44,7 @@
 
 
 
-      <div *ngIf="isLoading" class="d-flex justify-content-center" >
+      <div *ngIf="isLoading || !userDetailsData" class="d-flex justify-content-center" >
         <app-loading-spinner></app-loading-spinner>
       </div>
 

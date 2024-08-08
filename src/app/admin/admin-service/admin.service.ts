@@ -13,7 +13,7 @@ export class AdminService {
 
   constructor(private http:HttpClient , private store: Store) { }
 
- 
+  isLoading = new BehaviorSubject<boolean>(true)
   private usersCache = new Map<number, Map<number, UsersResponse>>();
   private userDetailsCache = new Map<number, any>();
   private apiUrl = 'https://reqres.in/api/users';
@@ -28,9 +28,12 @@ export class AdminService {
       const perPageCache = this.usersCache.get(pageNumber);
       if (perPageCache && perPageCache.has(per_page)) {
         console.log(`Retrieving data for page ${pageNumber} and per_page ${per_page} from cache`);
+          this.isLoading.next(false)
         return of(perPageCache.get(per_page) as UsersResponse);
       }
     } else {
+      this.isLoading.next(false)
+
       this.usersCache.set(pageNumber, new Map<number, UsersResponse>());
     }
   
@@ -42,6 +45,8 @@ export class AdminService {
             perPageCache.set(per_page, data);
           }
           console.log(`Data for page ${pageNumber} and per_page ${per_page} has been cached`);
+          this.isLoading.next(false)
+
         }),
         catchError(this.handleError)
       );
@@ -61,6 +66,7 @@ export class AdminService {
 
     if (this.userDetailsCache.has(id)){
       console.log(`Retrieving user details for user ${id} from cache`);
+      this.isLoading.next(false)
       return of(this.userDetailsCache.get(id));
     }else{
       return this.http.get<{data:user}>(`${this.apiUrl}/${id}`)
@@ -69,6 +75,7 @@ export class AdminService {
         tap(
           data=>{
             this.userDetailsCache.set(id, data);
+            this.isLoading.next(false)
             console.log(`User details for user ${id} have been cached`);
           }
         ),
@@ -93,7 +100,8 @@ export class AdminService {
    
       console.error(`body was: ${error.error.message}`);
     }
-   
+    this.isLoading.next(false)
+
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }

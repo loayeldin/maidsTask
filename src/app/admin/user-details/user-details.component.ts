@@ -17,6 +17,7 @@ export class UserDetailsComponent {
   userId!:number
   isLoading = true
 
+  loadingSubscription:Subscription = new Subscription()
   userSubscription: Subscription = new Subscription();
   routeSubscription : Subscription = new Subscription()
   ngOnInit(){
@@ -30,7 +31,11 @@ export class UserDetailsComponent {
     )
   
    
-   
+       this.loadingSubscription.add(
+        this.adminService.isLoading.subscribe(data=>{
+          this.isLoading = data
+        })
+       )
 
     this.store.dispatch(loadUserDetails({id:this.userId }));
 
@@ -60,6 +65,7 @@ export class UserDetailsComponent {
   ngOnDestroy(){
     this.userSubscription.unsubscribe()
     this.routeSubscription.unsubscribe()
+    this.loadingSubscription.unsubscribe()
   }
   
 }

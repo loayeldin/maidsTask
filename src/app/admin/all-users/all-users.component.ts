@@ -34,9 +34,17 @@ export class AllUsersComponent  {
   isLoading = true
   usersSubscription: Subscription = new Subscription();
   usersView!:string | null
+  loadingSubscription :Subscription = new Subscription()
   ngOnInit(){
+    this.loadingSubscription.add(
+      this.adminService.isLoading.subscribe(data=>{
+        this.isLoading = data
+        console.log(this.isLoading);
+        
+      })
+    )
     if (localStorage.getItem("usersView")) {
-      console.log("sdssss");
+   
       
 
    
@@ -69,6 +77,9 @@ export class AllUsersComponent  {
     this.usersSubscription.add(
       this.adminService.selectAllUsers().subscribe(data=>{
         this.usersData= data!
+       
+        console.log(this.isLoading);
+        
         console.log(this.usersData);
         this.pageSize = this.usersData.per_page;
             this.totalLength = this.usersData.total;
@@ -84,7 +95,11 @@ export class AllUsersComponent  {
               const increment = Math.ceil(this.totalLength / 4);
               this.pageSizeOptions = [increment, 2 * increment, 3 * increment, 4 * increment];
             }
-            this.isLoading = false;
+          
+            console.log(this.isLoading);
+            
+           
+            
         
       })
     )
@@ -193,6 +208,7 @@ export class AllUsersComponent  {
     }
 
   ngOnDestroy(){
+    this.loadingSubscription.unsubscribe()
     this.usersSubscription.unsubscribe()
   }
 

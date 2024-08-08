@@ -43,7 +43,7 @@
 
 
 
-      <div  class="table-container" >
+      <div   class="table-container" >
             <table class="table ">
                 <thead>
                   <tr class="text-center">
@@ -66,8 +66,10 @@
                   <ng-container *ngIf="!isLoading">
                     <tr class="text-center"
                         *ngFor="let user of usersData.data | filterById:(searchId || 0); let i = index"
-                        (click)="openUserDetails(user.id)">
-                      <td class="align-middle">{{ user.id }}</td>
+                        (click)="openUserDetails(user.id)"
+                        
+                        >
+                      <td  class="align-middle">{{ user.id }}</td>
                       <td class="align-middle">
                         <img class="user-img" [src]="user.avatar" alt="User Avatar">
                       </td>
@@ -87,13 +89,7 @@
 
 
                       
-                     <tr *ngIf="isLoading">
-                      <td  colspan="30" class="h-100">
-                        <div class="d-flex justify-content-center align-items-center">
-                          <app-loading-spinner></app-loading-spinner>
-                        </div>
-                      </td>
-                     </tr>
+                    
     
 
 
@@ -110,7 +106,7 @@
       </div>
 
 
-      <div  class="card-container">
+      <div    class="card-container">
         <div class="row">
 
           <div class="col-sm-6 col-md-4 my-2"
@@ -147,8 +143,11 @@
       </div>
 
 
-
-
+       
+      <div *ngIf="isLoading " class="d-flex justify-content-center align-items-center" >
+          <app-loading-spinner></app-loading-spinner>
+       </div>
+                    
       <div  *ngIf="(usersData.data | filterById:(searchId || 0)).length === 0" class="d-flex flex-column justify-content-center align-items-center my-3" style="background-color: white;">
         <img src="../../../assets/empty.svg" alt="No Data">
         <p>Looks like there is nothing here</p>

@@ -18,7 +18,8 @@ import { AdminRoutingModule } from './admin-routing.module';
         UserDetailsComponent,
         FilterByIdPipe,
         LoadingSpinnerComponent,
-        ResizeNavDirective
+        ResizeNavDirective,
+   
     ],
     imports: [
         CommonModule,
@@ -27,6 +28,6 @@ import { AdminRoutingModule } from './admin-routing.module';
         FormsModule,
         AdminRoutingModule,
        
-    ]
+    ],
 })
 export class AdminModule {}
