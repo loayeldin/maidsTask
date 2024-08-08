@@ -1,0 +1,179 @@
+
+<div class="admin-users mx-2 mx-md-4">
+    
+
+    <header>
+      <div class="d-flex align-items=center justify-content-between my-auto flex-wrap">
+        <div class="my-4 mx-1" >
+
+          
+          <div>
+            <input type="search" class="form-control "  id="name" placeholder="Search By Id" [(ngModel)]="searchId" >
+          </div>
+
+          
+
+           
+          
+        </div>
+
+        
+        <div class="example-container  my-4">
+          <mat-paginator [length]="totalLength"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="onPageChange($event)">
+          </mat-paginator>
+        </div>
+      </div>
+
+
+
+     <div class="layout-icons d-flex justify-content-end mx-4">
+        <div class="table-icon" (click)="tableView()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512"><path fill="#fcfcfc" d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm88 64l0 64-88 0 0-64 88 0zm56 0l88 0 0 64-88 0 0-64zm240 0l0 64-88 0 0-64 88 0zM64 224l88 0 0 64-88 0 0-64zm232 0l0 64-88 0 0-64 88 0zm64 0l88 0 0 64-88 0 0-64zM152 352l0 64-88 0 0-64 88 0zm56 0l88 0 0 64-88 0 0-64zm240 0l0 64-88 0 0-64 88 0z"/></svg>
+        </div>
+
+        <div class="cards-icon" (click)="cardView()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="21" viewBox="0 0 448 512"><path fill="#ffffff" d="M128 136c0-22.1-17.9-40-40-40L40 96C17.9 96 0 113.9 0 136l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48zm0 192c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48zm32-192l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40zM288 328c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48zm32-192l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40zM448 328c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48z"/></svg>
+        </div>
+     </div>
+
+
+
+
+
+      <div  class="table-container" >
+            <table class="table ">
+                <thead>
+                  <tr class="text-center">
+                   
+                    <th class="col-1" scope="col">id</th>
+                    <th class="col-2" scope="col">img</th>
+                    <th class="col-2" scope="col">email</th>
+                    <th class="col-2" scope="col">first name</th>
+                    <th class="col-3" scope="col">last name</th>
+                  
+               
+                  
+                  </tr>
+                </thead>
+                <tbody>
+
+
+
+        
+                  <ng-container *ngIf="!isLoading">
+                    <tr class="text-center"
+                        *ngFor="let user of usersData.data | filterById:(searchId || 0); let i = index"
+                        (click)="openUserDetails(user.id)">
+                      <td class="align-middle">{{ user.id }}</td>
+                      <td class="align-middle">
+                        <img class="user-img" [src]="user.avatar" alt="User Avatar">
+                      </td>
+                      <td class="align-middle">{{ user.email }}</td>
+                      <td class="align-middle">{{ user.first_name }}</td>
+                      <td class="align-middle">{{ user.last_name }}</td>
+                    </tr>
+                  
+                
+                  </ng-container>
+                  
+
+
+
+                  
+
+
+
+                      
+                     <tr *ngIf="isLoading">
+                      <td  colspan="30" class="h-100">
+                        <div class="d-flex justify-content-center align-items-center">
+                          <app-loading-spinner></app-loading-spinner>
+                        </div>
+                      </td>
+                     </tr>
+    
+
+
+
+
+
+
+
+
+        
+                </tbody>
+              </table>
+
+      </div>
+
+
+      <div  class="card-container">
+        <div class="row">
+
+          <div class="col-sm-6 col-md-4 my-2"
+            *ngFor="let user of usersData.data | filterById:(searchId || 0); let i = index"
+                  (click)="openUserDetails(user.id)"
+          >
+            <div class="card" >
+              <div>
+                <img [src]="user.avatar" class="card-img-top" alt="...">
+
+              </div>
+
+              <div class="card-body text-center">
+                <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+                <p class="card-text">{{user.email}}</p>
+                <a  class="btn details-btn  text-capitalize">more Details</a>
+              </div>
+            </div>
+          </div>
+        
+
+      
+
+
+      
+
+
+
+        </div>
+
+
+
+
+      </div>
+
+
+
+
+      <div  *ngIf="(usersData.data | filterById:(searchId || 0)).length === 0" class="d-flex flex-column justify-content-center align-items-center my-3" style="background-color: white;">
+        <img src="../../../assets/empty.svg" alt="No Data">
+        <p>Looks like there is nothing here</p>
+      </div>
+      
+
+
+
+
+      
+   
+
+
+
+
+
+
+
+
+
+    </header>
+
+
+
+
+
+
+</div>

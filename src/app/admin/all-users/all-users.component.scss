@@ -1,0 +1,181 @@
+
+.admin-users{
+    overflow: hidden;
+}
+.active
+{
+    background-color: var(--main-color);
+    color: white !important;
+}
+  .filter-btn:hover
+{
+    background-color: var(--main-color);
+    color: white ;
+}
+.table-container{
+    display: block;
+}
+
+.table-container.collapsed{
+    display: block;
+}
+table{
+    border-collapse: separate;
+    border-spacing: 0 10px; 
+   
+}
+th
+{
+    background-color: rgb(242,242,242);
+    color: rgb(68, 68, 139);
+  
+    padding: 10px;
+   
+}
+
+tbody tr{
+    border: 1px solid rgb(242,242,242);
+    transition: all 0.5s ease;
+    
+   
+  
+}
+
+tbody td{
+    padding: 20px;
+    font-size: 15px;
+    
+    transition: all 0.5s ease;
+}
+tbody tr:hover{
+    transform: translate(1%, 2%);
+}
+tbody tr:hover td{
+ 
+    cursor: pointer;
+    background-color: var(--main-color);
+    color: white;
+
+  
+  }
+
+.img-shape
+{
+    width: 130px;
+    height: 100px;
+}
+
+
+svg
+{
+    cursor: pointer;
+    
+}
+.text-color{
+    color: rgb(68, 68, 139); 
+    font-weight: 500;
+}
+
+input
+{
+  
+    padding: 10px 10px;
+    min-width: 200px!important;
+}
+
+.mat-mdc-paginator{
+    background-color: transparent  !important;
+    
+   
+   
+}
+::ng-deep .mat-mdc-paginator-container {
+    justify-content: flex-start !important;
+  
+}
+::ng-deep .mat-mdc-paginator-range-label {
+    margin: 0 5px 0 7px !important;
+}
+
+.user-img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.table-icon, .cards-icon
+{
+   
+    padding: 10px;
+  
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: 1s all;
+    background-color: white;
+ 
+}
+
+.table-icon svg path, .cards-icon svg path{
+    transition: 1s all;
+    fill: var(--main-color);
+   
+}
+
+
+
+
+
+
+
+
+
+/* start card view styles*/
+.card-container{
+    display: none;
+}
+
+
+
+
+.card-title{
+    font-size: 20px;
+}
+
+.card .details-btn{
+    background-color: var(--second-color);
+    color: white;
+}
+.card{
+    height: 400px;
+    box-shadow: 0px 3.27652px 26.21217px 0px rgba(0, 0, 0, 0.25);
+    transition: .5s all;
+    cursor: pointer;
+}
+
+.card:hover{
+    transform: scale(1.1);
+    z-index: 111;
+}
+
+
+.card-img-top{
+    height: 250px !important;
+}
+
+
+
+/* start card view styles*/
+@media screen and (max-width:650px){
+
+
+    .table-container{
+        overflow-y: auto !important;
+    }
+
+
+
+}
+
+
+

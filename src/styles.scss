@@ -1,0 +1,30 @@
+
+
+:root
+{
+   
+   
+
+	--white: #ffffff;
+	--padding: 1em;
+    --main-color:hsl(5, 100%, 69%);
+    --second-color:#bd5713;
+    
+   
+   
+    body{
+      
+        font-family: 'Roboto', sans-serif;;
+        
+
+        @media (max-width:1199px)
+        {
+            .container
+            {
+                min-width: 95% !important ;
+            }
+        }
+    }
+    
+}
+
